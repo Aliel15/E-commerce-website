@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - Clothing Store</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="logo">Clothing Store</div>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/shop">Shop</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="products">
+      <h1>Login</h1>
+      <form id="login-form">
+        <div>
+          <label>Email</label>
+          <input type="email" name="email" required />
+        </div>
+        <div>
+          <label>Password</label>
+          <input type="password" name="password" required />
+        </div>
+        <button type="submit">Login</button>
+      </form>
+      <p>New here? <a href="/register">Create an account</a></p>
+    </main>
+
+    <script>
+      document.getElementById('login-form').addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const form = e.currentTarget;
+        const payload = { email: form.email.value.trim(), password: form.password.value };
+        const res = await fetch('/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+        if (res.ok) {
+          window.location.href = '/shop';
+        } else {
+          const data = await res.json().catch(() => ({}));
+          alert(data.message || 'Login failed');
+        }
+      });
+    </script>
+  </body>
+  </html>

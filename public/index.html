@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+         <meta charset="UTF-8">
+         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Clothing Store</title>
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+
+    <body>
+        <header>
+            <div class="logo">Clothing Store</div>
+            <h1>My Store</h1>
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/shop">Shop</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                    <li><a href="#" id="cart-link">Cart (<span id="cart-count">0</span>)</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <h1>New Arrivals</h1>
+            <p>Check out the latest clothing selection</p>
+            <a class="btn" href="#products">Shop Now</a>
+        </section>
+         
+
+     <section class="products" id="products">
+
+            <h2>Featured products</h2>
+
+        <div class="product-grid" id="product-grid" aria-live="polite">
+            <!-- Products will be loaded here by JavaScript -->
+        </div>
+
+     </section>
+
+      <footer>
+        <p>&copy; 2025 Clothing Store. All Rights Reserved.</p>
+    </footer>
+    <script src="js/app.js"></script>
+</body>
+</html>

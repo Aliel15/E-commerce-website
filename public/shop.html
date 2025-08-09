@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shop</title>
+    <style>
+        .product { display: inline-block; margin: 20px; border: 1px solid #ccc; padding: 10px; }
+        img { width: 200px; height: auto; }
+    </style>
+</head>
+<body>
+    <h1>Our Products</h1>
+    <div id="product-list"></div>
+    <hr>
+    <h2>Place Order Manually</h2>
+    <form action="/order" method="POST">
+        <label>Product:</label>
+        <select name="product_id" id="product-select" required></select>
+        <label>Quantity:</label>
+        <input type="number" name="quantity" value="1" min="1" required>
+        <button type="submit">Order</button>
+    </form>
+
+    <script>
+        fetch('/api/products')
+            .then(res => res.json())
+            .then(products => {
+                const container = document.getElementById('product-list');
+                const select = document.getElementById('product-select');
+                products.forEach(p => {
+                    const div = document.createElement('div');
+                    div.className = 'product';
+                    div.innerHTML = `
+                        <img src="${p.image_url}" alt="${p.name}">
+                        <h3>${p.name}</h3>
+                        <p>${p.description}</p>
+                        <strong>$${p.price}</strong>
+                        <form method="POST" action="/order">
+                            <input type="hidden" name="product_id" value="${p.id}">
+                            <label>Quantity:</label>
+                            <input type="number" name="quantity" value="1" min="1">
+                            <button type="submit">Order Now</button>
+                        </form>
+                    `;
+                    container.appendChild(div);
+
+                    const opt = document.createElement('option');
+                    opt.value = p.id;
+                    opt.textContent = `${p.name} — $${p.price}`;
+                    select.appendChild(opt);
+                });
+            });
+    </script>
+</body>
+</html>
